@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="tpkApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script>
+angular.module('tpkApp', [])
+.controller('EmployeeCtrl', function($scope, $http) {
+    $http.get('employee/get/employees').
+        then(function(response, status) {
+            $scope.employeeList = response.data;
+        });
+    $scope.add = function() {
+    	$http({
+            'url' : 'employee/add',
+            'method' : 'POST',
+            'headers': {'Content-Type' : 'application/json'},
+            'data' : {"empId":192, "empName":"ravi1", "empPhone":"898989", "empAddress":"hyd1"}
+        }).success(function(response){
+        	$scope.employeeList = response.data;
+        })
+    }
+});
+</script>
+</head>
+<body>
+<H1>Hello.. You have created spring boot web application</H1>
+<div ng-controller="EmployeeCtrl">
+<button value="add" name="add" type="submit" ng-click=add()></button>
+<table>
+<thead> <tr> <th>Employee Id</th><th>Employee Name</th><th>Employee Phone</th><th>Employee Address</th></tr> </thead>
+<tbody><tr ng-repeat="employee in employeeList">
+		<td>{{employee.empId}}</td>
+		<td>{{employee.empName}}</td>
+		<td>{{employee.empPhone}}</td>
+		<td>{{employee.empAddress}}</td>
+</tbody>
+
+</table>
+</div>
+</body>
+</html>

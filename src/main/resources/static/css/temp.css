@@ -1,0 +1,112 @@
+body{
+    background: url(http://mymaplist.com/img/parallax/back.png);
+	background-color: #444;
+    background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);    
+}
+
+.vertical-offset-100{
+    padding-top:100px;
+}
+
+.image1{
+	
+    height:125px !important;
+    padding: 0;
+	
+	}
+	
+.divTable{
+	display: table;
+	width: 98%;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+}
+.divTableCell, .divTableHead {
+	border: 1px solid #999999;
+	display: table-cell;
+	padding:3px 17px;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+}
+
+
+.footer{
+position: fixed; 
+bottom: 0; 
+width: 100%; 
+padding-top: 4px;
+padding-bottom: 4px; 
+/*background-image: url(images/footer.png); */
+background-color:#013668;
+background-repeat: repeat-x;
+	}
+	
+.audience-group{
+        padding:5px;
+        margin:0 0 15px 0;
+        cursor:pointer;
+        
+}
+    
+.audience-group-checkbox{
+        margin: 0 10px 0 0;
+        float:left;
+}
+    
+.audience-group-name{
+        cursor:pointer;
+        float:left;
+        font-size:13px;
+        font-weight:bold;
+}
+    
+.audience{
+        padding:5px;
+        margin:0 0 15px 25px;
+        cursor:pointer;
+        display:none;
+}
+    
+.audience-checkbox{
+        margin: 0 10px 0 0;
+        float:left;
+}
+    
+.audience-name{
+        float:left;
+        font-size:13px;
+}
+.modal-content{
+  
+}	
+	
+	
+	
+	#example {
+    table-layout: fixed;
+     border-spacing:0;
+  position: relative;
+     }
+	
+#example td{
+	width: 50px;
+}
+
+/* li { background: green; }
+li:nth-child(odd) { background: red; } */
