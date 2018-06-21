@@ -26,8 +26,14 @@ public class HTTPService {
 	public void httpListnerConfiguration(String muleConfigPath, String conName) {
 		try {
 			Document doc = MuleConfigConnection.getDomObj(muleConfigPath);
-			Element muleTag = (Element) doc.getFirstChild();		
-			ArrayList<HTTPConnection> connections = new ArrayList<>();
+			Element muleTag = (Element) doc.getFirstChild();
+			Element httpConfig = doc.createElement("http:listener-config");
+			httpConfig.setAttribute("name", "HTTP_Listener_Configuration");
+			httpConfig.setAttribute("host", "0.0.0.0");
+			httpConfig.setAttribute("port", "8081");
+			httpConfig.setAttribute("doc:name", "HTTP Listener Configuration");
+			muleTag.appendChild(httpConfig);
+			/*ArrayList<HTTPConnection> connections = new ArrayList<>();
 			for (Map.Entry<String, Connection> entry : MuleAutomatorConstants.connectionConfigs.entrySet()) {
 				if (entry.getValue().getConnectionType().equals("HTTP")) {
 					connections.add((HTTPConnection) entry.getValue());
@@ -60,7 +66,7 @@ public class HTTPService {
 				httpConfig.setAttribute("doc:name", "HTTP Listener Configuration");
 				muleTag.appendChild(httpConfig);
 				MuleAutomatorConstants.configuredConnections.add("HTTP Listener Configuration");
-			}
+			}*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -267,14 +273,14 @@ public class HTTPService {
 		try {
 			Document doc = MuleConfigConnection.getDomObj(muleConfigPath);
 
-			httpRequestConfiguration(muleConfigPath,"HTTP_Request_Configuration");
+			/*httpRequestConfiguration(muleConfigPath,"HTTP_Request_Configuration");
 			Element httpListnerRecvier = doc.createElement("http:request");
 			httpListnerRecvier.setAttribute("config-ref", "HTTP_Request_Configuration");
 			httpListnerRecvier.setAttribute("path", "/pathName");
 			httpListnerRecvier.setAttribute("method", "GET, POST");
 			
 			httpListnerRecvier.setAttribute("doc:name", "HTTP");
-			flow.appendChild(httpListnerRecvier);
+			flow.appendChild(httpListnerRecvier);*/
 
 			String config_ref=webserviceConsumerConfiguration(muleConfigPath, soapSendReceiveActivity);
 			
@@ -310,8 +316,8 @@ public class HTTPService {
 			SOAPSendReplyActivity soapSendReplyActivity, Element flow) {
 		try {
 			Document doc = MuleConfigConnection.getDomObj(muleConfigPath);
-			Element xmlToJsonTransformer = doc.createElement("json:xml-to-json-transformer");
-			xmlToJsonTransformer.setAttribute("doc:name", "XML to JSON");
+			Element xmlToJsonTransformer = doc.createElement("json:object-to-json-transformer");
+			xmlToJsonTransformer.setAttribute("doc:name", "Object to JSON");
 			flow.appendChild(xmlToJsonTransformer);
 		} catch (Exception e) {
 			e.printStackTrace();

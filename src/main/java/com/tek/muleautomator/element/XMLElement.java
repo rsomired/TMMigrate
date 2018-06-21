@@ -14,7 +14,7 @@ public static class XMLRendererActivity{
 	       this.CONFIG_description="The Render XML activity takes an instance of an XML schema element and renders it as a stream of bytes containing XML or an XML string. The schema is processed based on the XSD file specified. ";
 	       this.activityType=rootActivityElement.getElementsByTagName("pd:type").item(0).getTextContent();
 	       this.CONFIG_validateInput=rootActivityElement.getElementsByTagName("validateInput").item(0).getTextContent();
-	       this.CONFIG_encoding=rootActivityElement.getElementsByTagName("textEncoding").item(0).getTextContent();
+	       //this.CONFIG_encoding=rootActivityElement.getElementsByTagName("textEncoding").item(0).getTextContent();
 }
 	public String getCONFIG_description() {
 		return CONFIG_description;

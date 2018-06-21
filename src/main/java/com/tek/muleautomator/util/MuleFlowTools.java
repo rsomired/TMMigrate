@@ -85,7 +85,7 @@ public class MuleFlowTools {
 			
 			Element forEachTag=doc.createElement("foreach");
 			forEachTag.setAttribute("doc:name", "For Each");
-			
+			forEachTag.setAttribute("collection", "#[payload]");
 			flowElement.appendChild(forEachTag);
 			
 			for(ActivityElement actEl: activityElements){

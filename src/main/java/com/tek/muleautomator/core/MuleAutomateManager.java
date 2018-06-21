@@ -41,9 +41,10 @@ public class MuleAutomateManager {
 	public static void migrateTibcoToMule(TMMigrateModel tmMigrateModel) {
 		Element flowElement = null;
 		try {
+			System.out.println("* * Starting migration from TIBCO to MULE * *");
 			String tibcoProjectLocationRootFolder = tmMigrateModel.getTibcoProjectLocation();
 			String workspace = tmMigrateModel.getMuleWorkspaceLocation();
-			System.out.println(tibcoProjectLocationRootFolder+"========"+workspace);
+			System.out.println("* * "+tibcoProjectLocationRootFolder+" ------> "+workspace+" * *");
 			MuleAutomatorUtil.fileFinder(new File(tibcoProjectLocationRootFolder),
 					MuleAutomatorConstants.allTibcoProcessFiles, new String[] { "process" });
 			// System.out.println("All:

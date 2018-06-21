@@ -49,14 +49,31 @@ public class JMSService {
 					if(con.IS_CONFIGURED)
 						break;
 					con.IS_CONFIGURED=true;
-					jmsConfig = doc.createElement("jms:activemq-connector");
+					jmsConfig = doc.createElement("jms:connector");
 					jmsConfig.setAttribute("name", con.CONNECTION_NAME.replaceAll(" ", "_"));
-					jmsConfig.setAttribute("brokerURL", con.PROVIDER_URL);
 					jmsConfig.setAttribute("username", con.USERNAME);
 					jmsConfig.setAttribute("password", con.PASSWORD);
 					jmsConfig.setAttribute("validateConnections", "true");
-					jmsConfig.setAttribute("doc:name", "Active MQ");
+					jmsConfig.setAttribute("jndiInitialFactory", "com.tibco.tibjms.naming.TibjmsInitialContextFactory");
+					jmsConfig.setAttribute("jndiProviderUrl", con.PROVIDER_URL);
+					jmsConfig.setAttribute("connectionFactoryJndiName", "QueueConnectionFactory");
+					jmsConfig.setAttribute("jndiDestinations", "true");
+					jmsConfig.setAttribute("persistentDelivery", "true");
+					jmsConfig.setAttribute("doc:name", "JMS");
 					jmsConfig.setAttribute("durable", "true");
+					Element springProperties = doc.createElement("spring:property");
+					springProperties.setAttribute("name", "jndiProviderProperties");
+					Element springMap = doc.createElement("spring:map");
+					Element springEntryPrincipal = doc.createElement("spring:entry");
+					springEntryPrincipal.setAttribute("key", "java.naming.security.principal");
+					springEntryPrincipal.setAttribute("value", con.USERNAME);
+					springMap.appendChild(springEntryPrincipal);
+					Element springEntryCredential = doc.createElement("spring:entry");
+					springEntryCredential.setAttribute("key", "java.naming.security.credentials");
+					springEntryCredential.setAttribute("value", con.PASSWORD);
+					springMap.appendChild(springEntryCredential);
+					springProperties.appendChild(springMap);
+					jmsConfig.appendChild(springProperties);
 					muleTag.appendChild(jmsConfig);
 				}
 			} else {

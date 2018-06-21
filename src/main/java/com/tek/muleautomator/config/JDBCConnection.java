@@ -63,8 +63,8 @@ public class JDBCConnection extends Connection {
         try{
         	t=t.split("//")[1];
         	this.HOST=t.split(":")[0];
-            this.INSTANCE=t.split("=")[1];
-            this.PORT=t.split(":")[1].split(";")[0];
+            this.INSTANCE=t.split("/")[1];
+            this.PORT=t.split(":")[1].split("/")[0];
         } catch (Exception E){
         	this.HOST=t;
         	this.PORT="1521";

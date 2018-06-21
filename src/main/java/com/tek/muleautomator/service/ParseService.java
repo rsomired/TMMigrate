@@ -29,7 +29,7 @@ public class ParseService {
 				String val=MuleAutomatorConstants.specifiedSchema.get(muleConfigPath);
 				val+=";dw:transform-message";
 				MuleAutomatorConstants.specifiedSchema.put(muleConfigPath, val);
-			}parser.setAttribute("set-payload","");
+			}//parser.setAttribute("set-payload","");
 			parser.setAttribute("doc:name", "Transform message");
 			flow.appendChild(parser);
 		} 

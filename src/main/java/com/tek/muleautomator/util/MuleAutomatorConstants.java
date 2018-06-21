@@ -24,7 +24,7 @@ public class MuleAutomatorConstants {
 	public static String TIBCO_PROJECT_ROOT_FOLDER;
     private static String seperator = File.separator;
     public static String muleConfigTemplate="";
-    public static String muleConfigTemplatePath="..\\src\\main\\resources\\config-template.xml";
+    public static String muleConfigTemplatePath= "/TMMigrate/src/main/resources/config-template.xml";
 	public static boolean removeExistingProject=true;
 	public static String muleResourcesPath="";
 	public static String tibcoProcessPath="";
@@ -51,7 +51,6 @@ public class MuleAutomatorConstants {
     	
     	// Load Mule Config Template
     	File file=new File(muleConfigTemplatePath);
-    	
     	try(FileReader reader = new FileReader(file);) {
 			char[] buff=new char[4096];
 			int bfLength=0;

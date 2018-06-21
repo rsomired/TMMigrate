@@ -15,7 +15,7 @@ public class JDBCElement {
 		if(!preparedQuery.contains("?"))
 			return preparedQuery;
 		for(String a:params)
-			preparedQuery=preparedQuery.replaceFirst("\\?",":"+a);
+			preparedQuery=preparedQuery.replaceFirst("\\?","#[payload."+a+"]");
 		return preparedQuery;
 	}
 	
@@ -309,7 +309,7 @@ public class JDBCElement {
 		
 		public JDBCSQLDirectActivity(Node targetNode){
 			
-			JDBCUpdateActivity.description="The SQL Direct activity executes a SQL statement that you provide. This activity allows you to build a SQL statement dynamically (using other activities), then pass the SQL statement into this activity’s input";
+			JDBCUpdateActivity.description="The SQL Direct activity executes a SQL statement that you provide. This activity allows you to build a SQL statement dynamically (using other activities), then pass the SQL statement into this activityï¿½s input";
 			Element rootActivityElement = (Element)targetNode;
         	JDBCUpdateActivity.activityType=rootActivityElement.getElementsByTagName("pd:type").item(0).getTextContent();
         	//JDBCUpdateActivity.connectionPath=rootActivityElement.getElementsByTagName("jdbcSharedConfig").item(0).getTextContent();

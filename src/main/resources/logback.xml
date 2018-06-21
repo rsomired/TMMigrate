@@ -2,13 +2,23 @@
 <configuration>
     <timestamp key="monthly" datePattern="-yyyy-MM-dd" />
 
-    <property name="log.path.active" value="${catalina.home}/tpkLogs/" />
-    <property name="log.path.archive" value="${catalina.home}/tpkLogs/archive" />
+    <property name="log.path.active" value="${catalina.home}/TMMigrateLogs/" />
+    <property name="log.path.archive" value="${catalina.home}/TMMigrateLogs/archive" />
     <property name="log.file.standard" value="stdout" />
     <property name="log.file.error" value="stderr" />
     <property name="log.file.soapserver" value="soapserver" />
     <property name="log.file.soapclient" value="soapclient" />
 
+	# Redirect Log Messages To Console !!
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	    <!-- encoders are assigned the type
+	         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+	    <encoder>
+	      <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+	    </encoder>
+	  </appender>
+ 
+	
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <Pattern>[%d{yyyy-MM-dd}] %d{HH:mm:ss.SSS}[%p] [%thread] %logger - %msg%n</Pattern>
@@ -69,11 +79,12 @@
         <appender-ref ref="STDFILE" />
     </logger>
 
-
+	<root level="DEBUG">
+	    <appender-ref ref="STDOUT" />
+	  </root>
     <root>
         <level value="WARN" />
         <appender-ref ref="STDFILE" />
-
         <appender-ref ref="CONSOLE" />
     </root>
 

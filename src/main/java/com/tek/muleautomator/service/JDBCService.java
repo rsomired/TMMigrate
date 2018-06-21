@@ -143,22 +143,31 @@ public class JDBCService {
 			Element dbParamQuery = doc.createElement("db:parameterized-query");
 			dbParamQuery.setTextContent(jdbcUpdateActivity.getNamedParamsQuery());
 			dbInsert.appendChild(dbParamQuery);
+			
+			Element jdbcTemplateConfig = doc.createElement("db:template-query");
+			jdbcTemplateConfig.setAttribute("name", "Template_Query");
+			jdbcTemplateConfig.setAttribute("doc:name", "Template Query");
+			Element pQuery = doc.createElement("db:parameterized-query");
+			Element cData = doc.createElement("![CDATA["+jdbcUpdateActivity.getNamedParamsQuery()+"]]");
+			pQuery.appendChild(cData);
+			jdbcTemplateConfig.appendChild(pQuery);
 
 			for (String param : jdbcUpdateActivity.getQueryParams()) {
 
 				Element dbParam = doc.createElement("db:in-param");
 				dbParam.setAttribute("name", param);
-				dbParam.setAttribute("value", "#[payload." + param + "]");
-				dbInsert.appendChild(dbParam);
+				dbParam.setAttribute("defaultValue", "#[payload." + param + "]");
+				jdbcTemplateConfig.appendChild(dbParam);
 
 			}
 
-			flow.appendChild(dbInsert);
+			flow.appendChild(jdbcTemplateConfig);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 
 	public void jdbcUpdate(String muleConfigPath, JDBCElement.JDBCUpdateActivity jdbcUpdateActivity, Element flow) {
 
@@ -167,15 +176,15 @@ public class JDBCService {
 
 			jdbcConfiguration(muleConfigPath, jdbcUpdateActivity.getConnectionName());
 
-			Element dbUpdate = doc.createElement("db:update");
+			Element dbUpdate = doc.createElement("db:insert");
 			dbUpdate.setAttribute("config-ref", jdbcUpdateActivity.getConnectionName().replaceAll(" ", "_"));
 			dbUpdate.setAttribute("doc:name", "Database");
-
+			
 			Element dbParamQuery = doc.createElement("db:parameterized-query");
 			dbParamQuery.setTextContent(jdbcUpdateActivity.getNamedParamsQuery());
 			dbUpdate.appendChild(dbParamQuery);
-
-			for (String param : jdbcUpdateActivity.getQueryParams()) {
+			
+			/*for (String param : jdbcUpdateActivity.getQueryParams()) {
 
 				Element dbParam = doc.createElement("db:in-param");
 				dbParam.setAttribute("name", param);
@@ -183,9 +192,8 @@ public class JDBCService {
 				dbUpdate.appendChild(dbParam);
 
 			}
-
+*/
 			flow.appendChild(dbUpdate);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
